@@ -1,0 +1,62 @@
+
+<!-- saved from url=(0035)http://127.0.0.1:5500/ai-thon2.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body>import React, { useEffect, useRef, useState } from 'react';
+
+<button onclick="{()" ==""> runCode()} className="px-3 py-1 rounded bg-blue-600 text-white"&gt;Run</button>
+<button onclick="{()" ==""> { const ex = generateExercise('easy'); setCode(ex.starter); setOutput(ex.description); }} className="px-3 py-1 rounded bg-green-600 text-white"&gt;Generate Exercise</button>
+<button onclick="{()" ==""> runTutorialCheck(0)} className="px-3 py-1 rounded bg-indigo-600 text-white"&gt;Check Tutorial Step 1</button>
+
+<div style="{{" height:="" '60vh',="" borderradius:="" 8,="" overflow:="" 'hidden'="" }}="">
+<editor theme="vs-dark" defaultlanguage="{language" =="=" 'typescript'="" ?="" :="" language="==" 'python'="" 'javascript'}="" value="{code}" onchange="{(v)"> setCode(v || '')}
+onMount={(editor, monaco) =&gt; { monacoRef.current = { editor, monaco }; }}
+/&gt;
+</editor></div>
+
+
+
+<aside classname="w-1/4">
+<div classname="mb-4 p-3 border rounded">
+<h3 classname="font-semibold">Output</h3>
+<pre classname="text-xs h-40 overflow-auto bg-black text-green-200 p-2 rounded">{output}</pre>
+</div>
+
+
+<div classname="mb-4 p-3 border rounded">
+<h3 classname="font-semibold">Analysis</h3>
+<div classname="text-xs h-40 overflow-auto">
+{analysis.length === 0 &amp;&amp; <div classname="text-gray-500">No analysis results yet.</div>}
+{analysis.map((a, i) =&gt; (
+<div key="{i}" classname="mb-2 p-1 border-l-2" style="{{" bordercolor:="" a.severity="==" 2="" ?="" '#f87171'="" :="" '#fbbf24'="" }}="">
+<div classname="font-semibold">{a.ruleId || a.type}</div>
+<div classname="text-xs">{String(a.message || a.reason || a.messageText || a.description)}</div>
+{a.suggestion &amp;&amp; <div classname="text-xs text-blue-600">Suggestion: {a.suggestion}</div>}
+</div>
+))}
+</div>
+</div>
+
+
+<div classname="p-3 border rounded">
+<h3 classname="font-semibold">Tutorial</h3>
+<div classname="text-xs">
+<div classname="mb-2">{tutorial.title}</div>
+{tutorial.steps.map((s) =&gt; (
+<div key="{s.id}" classname="mb-1">• {s.text}</div>
+))}
+</div>
+</div>
+</aside>
+
+
+
+<footer classname="mt-4 text-sm text-gray-500">
+<div>Notes:</div>
+<ul classname="list-disc ml-6">
+<li>ESLint and TypeScript transpiler are loaded from CDN builds for in-browser analysis.</li>
+<li>Python runs using Pyodide (WebAssembly) for a realistic Python experience client-side.</li>
+<li>This demo uses heuristic suggestions — for production, connect to language servers or a dedicated analysis backend (LSP, MyPy, Pyright, etc.).</li>
+</ul>
+</footer>
+
+);
+}</body></html>
